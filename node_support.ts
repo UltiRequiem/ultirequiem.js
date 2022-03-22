@@ -15,7 +15,7 @@ export async function buildPackage(
     description: string;
   },
   buildOptions: {
-    entryPoints?: EntryPoint[];
+    entryPoints?: (string|EntryPoint)[];
     outDir?: string;
     shims?: ShimOptions;
   } = {}
