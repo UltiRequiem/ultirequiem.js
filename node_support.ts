@@ -17,7 +17,7 @@ export async function buildPackage(
   buildOptions: {
     entryPoints?: (string|EntryPoint)[];
     outDir?: string;
-    onlyESM: boolean;
+    onlyESM?: boolean;
     shims?: ShimOptions;
   } = {}
 ) {
