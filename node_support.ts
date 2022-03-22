@@ -33,7 +33,7 @@ export async function buildPackage(
     repoName,
     name = repoName,
     version,
-    onlyESM = false;
+    onlyESM = false,
     license = "MIT",
     description,
   } = packageConfig;
