@@ -17,6 +17,7 @@ export async function buildPackage(
   buildOptions: {
     entryPoints?: (string|EntryPoint)[];
     outDir?: string;
+    onlyESM: boolean;
     shims?: ShimOptions;
   } = {}
 ) {
@@ -32,6 +33,7 @@ export async function buildPackage(
     repoName,
     name = repoName,
     version,
+    onlyESM = false;
     license = "MIT",
     description,
   } = packageConfig;
@@ -48,6 +50,9 @@ export async function buildPackage(
       description: description,
 
       version: version,
+      
+      scriptModule: onlyESM,
+
 
       license: license,
 
