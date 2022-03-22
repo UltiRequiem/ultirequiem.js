@@ -43,6 +43,9 @@ export async function buildPackage(
 
     outDir,
 
+          scriptModule: onlyESM,
+
+    
     shims,
 
     package: {
@@ -51,7 +54,6 @@ export async function buildPackage(
 
       version: version,
       
-      scriptModule: onlyESM,
 
 
       license: license,
