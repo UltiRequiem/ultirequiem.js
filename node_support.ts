@@ -68,6 +68,8 @@ export async function buildPackage(
     },
   });
 
-  Deno.copyFileSync("license", "node/LICENSE");
-  Deno.copyFileSync("readme.md", "node/README.md");
+  await Promise.all([
+    Deno.copyFile("license", "node/LICENSE"),
+    Deno.copyFile("readme.md", "node/README.md"),
+  ]);
 }
