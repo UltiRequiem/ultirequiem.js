@@ -17,14 +17,14 @@ export async function buildPackage(
   buildOptions: {
     entryPoints?: (string|EntryPoint)[];
     outDir?: string;
-    onlyESM?: boolean;
+    supportCJS?: false;
     shims?: ShimOptions;
   } = {}
 ) {
   const {
     entryPoints = ["./mod.ts"],
     outDir = "./node",
-    onlyESM = false,
+    supportCJS = undefined,
     shims = { deno: true },
   } = buildOptions;
 
@@ -43,7 +43,7 @@ export async function buildPackage(
 
     outDir,
 
-          scriptModule: onlyESM,
+          scriptModule: supportCJS,
 
     
     shims,
