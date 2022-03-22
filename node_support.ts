@@ -24,6 +24,7 @@ export async function buildPackage(
   const {
     entryPoints = ["./mod.ts"],
     outDir = "./node",
+    onlyESM = false,
     shims = { deno: true },
   } = buildOptions;
 
@@ -33,7 +34,6 @@ export async function buildPackage(
     repoName,
     name = repoName,
     version,
-    onlyESM = false,
     license = "MIT",
     description,
   } = packageConfig;
