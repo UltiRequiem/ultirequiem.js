@@ -75,17 +75,14 @@ export async function buildPackage(
     },
   });
 
-  let filePromise;
   
   try {
-    filePromise =  Deno.copyFile("license", "node/LICENSE")
+  await Deno.copyFile("license", "node/LICENSE")
   } catch{
-    filePromise =  Deno.copyFile("license.md", "node/LICENSE")
+ await Deno.copyFile("license.md", "node/LICENSE")
   }
   
   
-  await Promise.all([
-    filePromise,
-    Deno.copyFile("readme.md", "node/README.md"),
-  ]);
+await    Deno.copyFile("readme.md", "node/README.md"),
+
 }
