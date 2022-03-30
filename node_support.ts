@@ -17,6 +17,7 @@ export async function buildPackage(
   buildOptions: {
     entryPoints?: (string|EntryPoint)[];
     outDir?: string;
+    check?: false;
     supportCJS?: false;
     shims?: ShimOptions;
   } = {}
@@ -24,6 +25,7 @@ export async function buildPackage(
   const {
     entryPoints = ["./mod.ts"],
     outDir = "./node",
+    check=true,
     supportCJS = undefined,
     shims = { deno: true },
   } = buildOptions;
@@ -44,7 +46,7 @@ export async function buildPackage(
     outDir,
 
           scriptModule: supportCJS,
-
+typeCheck:check,
     
     shims,
 
