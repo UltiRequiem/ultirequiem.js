@@ -83,6 +83,6 @@ export async function buildPackage(
   }
   
   
-await    Deno.copyFile("readme.md", "node/README.md"),
+await    Deno.copyFile("readme.md", "node/README.md")
 
 }
