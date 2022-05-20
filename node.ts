@@ -1,31 +1,35 @@
 import { build, EntryPoint } from "https://deno.land/x/dnt@0.22.0/mod.ts";
 
-import { publisher } from "./me.ts";
-
 import type { ShimOptions } from "https://deno.land/x/dnt@0.22.0/lib/shims.ts";
 
+import { publisher } from "./me.ts";
+
+export interface PackageConfig {
+  keywords: string[];
+  homepage: string;
+  repoName: string;
+  name?: string;
+  version: string;
+  license?: string;
+  description: string;
+}
+
+export interface BuildOptions {
+  entryPoints?: (string | EntryPoint)[];
+  outDir?: string;
+  typeCheck?: false;
+  supportCJS?: false;
+  shims?: ShimOptions;
+}
+
 export async function buildPackage(
-  packageConfig: {
-    keywords: string[];
-    homepage: string;
-    repoName: string;
-    name?: string;
-    version: string;
-    license?: string;
-    description: string;
-  },
-  buildOptions: {
-    entryPoints?: (string|EntryPoint)[];
-    outDir?: string;
-    check?: false;
-    supportCJS?: false;
-    shims?: ShimOptions;
-  } = {}
+  packageConfig: PackageConfig,
+  buildOptions: BuildOptions = {},
 ) {
   const {
     entryPoints = ["./mod.ts"],
     outDir = "./node",
-    check=true,
+    typeCheck = true,
     supportCJS = undefined,
     shims = { deno: true },
   } = buildOptions;
@@ -41,24 +45,17 @@ export async function buildPackage(
   } = packageConfig;
 
   await build({
-    entryPoints: entryPoints,
-
+    entryPoints,
     outDir,
-
-          scriptModule: supportCJS,
-typeCheck:check,
-    
+    scriptModule: supportCJS,
+    typeCheck,
     shims,
-
     package: {
-      name: name,
-      description: description,
-
-      version: version,
-      
-
-
-      license: license,
+      name,
+      description,
+      version,
+      homepage,
+      license,
 
       funding: {
         type: "patreon",
@@ -66,7 +63,6 @@ typeCheck:check,
       },
 
       repository: `github:${publisher.username}/${repoName}`,
-      homepage,
 
       bugs: {
         url: `https://github.com/${publisher.username}/${repoName}/issues`,
@@ -77,14 +73,11 @@ typeCheck:check,
     },
   });
 
-  
   try {
-  await Deno.copyFile("license", "node/LICENSE")
-  } catch{
- await Deno.copyFile("license.md", "node/LICENSE")
+    await Deno.copyFile("license", "node/LICENSE");
+  } catch {
+    await Deno.copyFile("license.md", "node/LICENSE");
   }
-  
-  
-await    Deno.copyFile("readme.md", "node/README.md")
 
+  await Deno.copyFile("readme.md", "node/README.md");
 }

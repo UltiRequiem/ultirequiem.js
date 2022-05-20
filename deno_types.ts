@@ -1,1 +1,1 @@
-export type Test = Deno.TestDefinition & Deno.BenchDefinition 
+export type Test = Deno.TestDefinition & Deno.BenchDefinition;
