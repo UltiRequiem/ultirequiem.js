@@ -6,7 +6,7 @@ import { publisher } from "./me.ts";
 
 export interface PackageConfig {
   keywords: string[];
-  homepage: string;
+  homepage?: string;
   repoName: string;
   name?: string;
   version: string;
