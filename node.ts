@@ -36,8 +36,8 @@ export async function buildPackage(
 
   const {
     keywords,
-    homepage,
     repoName,
+    homepage = `https://ulti.js.org/${repoName}`,
     name = repoName,
     version,
     license = "MIT",
